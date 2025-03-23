@@ -1,0 +1,31 @@
+def min_adjacent_swaps(N, A, B):
+    
+    if sorted(A) != sorted(B):
+        return -1
+
+    A = list(A)
+    B = list(B)
+    swaps = 0
+
+    for i in range(N):
+        if A[i] != B[i]:
+            
+            j = i
+            while A[j] != B[i]:
+                j += 1
+            
+            while j > i:
+                A[j], A[j - 1] = A[j - 1], A[j]
+                swaps += 1
+                j -= 1
+
+    return swaps
+
+
+
+N = int(input())
+A = input().strip()
+B = input().strip()
+
+result = min_adjacent_swaps(N, A, B)
+print(result)
