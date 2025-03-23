@@ -1,0 +1,26 @@
+from collections import deque
+
+def min_of_max_brightness(k, n, brightness):
+    dq = deque()
+    max_in_subarrays = []
+
+    for i in range(n):
+        if dq and dq[0] < i - k + 1:
+            dq.popleft()
+
+        while dq and brightness[dq[-1]] <= brightness[i]:
+            dq.pop()
+
+        dq.append(i)
+
+        if i >= k - 1:
+            max_in_subarrays.append(brightness[dq[0]])
+
+    return min(max_in_subarrays)
+
+k = int(input())
+n = int(input())
+brightness = [int(input()) for _ in range(n)]
+
+result = min_of_max_brightness(k, n, brightness)
+print(result)
