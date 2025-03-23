@@ -1,0 +1,34 @@
+def analyze_power_consumption(readings):
+    
+    if any(reading < 10 or reading > 200 for reading in readings):
+        print("INVALID INPUT")
+        return
+    
+    sensors = [0] * 5  
+    num_times = 4  
+
+    for i in range(5):
+        sensors[i] = sum(readings[i::5])
+
+    averages = [round(total / num_times) for total in sensors]
+
+    
+    max_avg = max(averages)
+
+    if max_avg < 50:
+        print("Energy consumption is optimal.")
+        return
+
+    highest_sensors = [i + 1 for i, avg in enumerate(averages) if avg == max_avg]
+
+    for sensor in highest_sensors:
+        print(f"Sensor Number : {sensor}")
+
+
+
+readings = list(map(int, input("Enter 20 power consumption readings: ").split()))
+
+if len(readings) != 20:
+    print("INVALID INPUT")
+else:
+    analyze_power_consumption(readings)'''
